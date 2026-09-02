@@ -1,5 +1,5 @@
-from functions.CreateBak import BakMi
+from functions.Control import start, end
 
 if __name__ == "__main__":
-    inputFiles = r"inputs"
-    outputs = r"outputs"
+    start()
+    end()
