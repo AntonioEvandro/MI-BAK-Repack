@@ -21,11 +21,15 @@ def BakMi(inputs, outputs, name):
     print("3. Injetando cabeçalho...")
     header = b"ANDROID BACKUP\n2\n1\nnone\n"
 
-    with open(outputs, "wb") as fOut:
+    file = outputs + "/" + name + ".bak"
+    with open(file, "wb") as fOut:
         fOut.write(header)
         fOut.write(gzipData)
 
     if os.path.exists(tarTemp):
         os.remove(tarTemp)
+
+    byteSize = os.path.getsize(file)
+    print(f"\n[SUCESSO] Arquivo .bak gerado!")
 
     print("\nArquivos em: " + inputs + ", usados para criar: " + name + r".bak" + ".\nPasta do .bak resultante: " + outputs + ".")
