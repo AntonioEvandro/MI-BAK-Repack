@@ -1,6 +1,5 @@
 import os
 import tarfile
-import gzip
 from functions.Finale import finale
 
 def BakMi(inputs, outputs, name, package):
@@ -19,15 +18,13 @@ def BakMi(inputs, outputs, name, package):
     with open(tarTemp, "rb") as fIn:
         tarData = fIn.read()
 
-    gzipData = gzip.compress(tarData)
-
     print("3. Injetando cabeçalho...")
-    header = b"ANDROID BACKUP\n2\n1\nnone\n"
+    header = b"ANDROID BACKUP\n2\n0\nnone\n"
 
     file = outputs + "/" + name + ".bak"
     with open(file, "wb") as fOut:
         fOut.write(header)
-        fOut.write(gzipData)
+        fOut.write(tarData)
 
     if os.path.exists(tarTemp):
        os.remove(tarTemp)
