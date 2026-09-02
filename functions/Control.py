@@ -7,3 +7,10 @@ def end():
 
 def start():
     print(menu())
+    while True:
+        try:
+            fileName = input("Nome do arquivo final ou comando:\n   ")
+        except (EOFError, KeyboardInterrupt):
+            raise
+        if fileName in ("exit", "sair", "q"):
+            break
