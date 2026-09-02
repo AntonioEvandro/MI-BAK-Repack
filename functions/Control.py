@@ -51,4 +51,5 @@ def start():
             proceed()
         elif not fileName:
             #print("Informe um nome de arquivo a criar.")
-            BakMi(inputFiles, outputs, package)
+            fileName = package
+            BakMi(inputFiles, outputs, fileName)
