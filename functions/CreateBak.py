@@ -1,6 +1,7 @@
 import os
 import tarfile
 import gzip
+from functions.Finale import finale
 
 def BakMi(inputs, outputs, name):
     """
@@ -30,3 +31,5 @@ def BakMi(inputs, outputs, name):
         os.remove(tarTemp)
 
     byteSize = os.path.getsize(file)
+
+    finale(inputs, name, outputs, byteSize)
