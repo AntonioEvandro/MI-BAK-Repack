@@ -11,9 +11,12 @@ class Strings():
                 ║  que deseje empacotar num ar-║
                 ║  quivo .bak na pasta inputs. ║
                 ║                              ║
+                ║ • Para sair digite (sair),   ║
+                ║  (exit) ou (q) quando quiser ║
+                ║                              ║
                 ╚══════════════════════════════╝"""
     
-    _Sair = """
+    _Exit = """
                 ╔══════════════════════════════╗
                 ║                              ║
                 ║       E n c e r a n d o      ║
@@ -24,7 +27,7 @@ class Strings():
                 ║                              ║
                 ╚══════════════════════════════╝"""
 
-    _Sucesso = """
+    _Sucess = """
                 ╔══════════════════════════════╗
                 ║                              ║
                 ║       O p e r a ç ã o        ║
@@ -41,7 +44,7 @@ def menu():
     return Strings._Menu
 
 def sucess():
-    return Strings._Sucesso
+    return Strings._Sucess
 
 def exit():
-    return Strings._Sair
+    return Strings._Exit
