@@ -1,3 +1,4 @@
+import os
 import sys
 from utils.Utils import menu, exit
 from functions.CreateBak import BakMi
@@ -21,9 +22,26 @@ def start():
     print(menu())
     inputFiles = r"inputs"
     outputs = r"outputs"
+    package = ""
+    while True:
+        try: package = input("Nome do pacote na pasta inputs:\n    ")
+        except (EOFError, KeyboardInterrupt):
+            raise
+        if package in ("exit", "sair", "q"):
+            end()
+            break
+        elif package:
+            if os.path.exists(inputFiles + "/" + package):
+                inputFiles = inputFiles + "/" + package
+                break
+            else:
+                print("\033[31mNome de pacote não encontrado\033[0m\n    Verifique a pasta \033[33minputs\033[0m\n")
+        elif not package:
+            print("Informe o nome do pacote do aplicativo em inputs/\n")
+        
     while True:
         try:
-            fileName = input("Nome do arquivo final ou comando:\n   ")
+            fileName = input("Nome do arquivo final.\n  Digite o nome que deseje ou enter para usar o nome do pacote na pasta:\n   ")
         except (EOFError, KeyboardInterrupt):
             raise
         if fileName in ("exit", "sair", "q"):
@@ -32,4 +50,5 @@ def start():
             BakMi(inputFiles, outputs, fileName)
             proceed()
         elif not fileName:
-            print("Informe um nome de arquivo a criar ou comando.")
+            #print("Informe um nome de arquivo a criar.")
+            BakMi(inputFiles, outputs, package)
