@@ -1,3 +1,4 @@
+import os
 import tarfile
 
 def BakMi(inputs, outputs, name):
@@ -8,6 +9,8 @@ def BakMi(inputs, outputs, name):
 
     print("1. Criando a estrutura de arquivos TAR...")
     with tarfile.open(tarTemp, "W") as tar:
-        tar.add(inputs)
+        tar.add(inputs, os.path.basename(inputs))
+
+    
 
     print("\nArquivos em: " + inputs + ", usados para criar: " + name + r".bak" + ".\nPasta do .bak resultante: " + outputs + ".")
