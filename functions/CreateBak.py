@@ -18,4 +18,14 @@ def BakMi(inputs, outputs, name):
 
     gzipData = gzip.compress(tarData)
 
+    print("3. Injetando cabeçalho...")
+    header = b"ANDROID BACKUP\n2\n1\nnone\n"
+
+    with open(outputs, "wb") as fOut:
+        fOut.write(header)
+        fOut.write(gzipData)
+
+    if os.path.exists(tarTemp):
+        os.remove(tarTemp)
+
     print("\nArquivos em: " + inputs + ", usados para criar: " + name + r".bak" + ".\nPasta do .bak resultante: " + outputs + ".")
