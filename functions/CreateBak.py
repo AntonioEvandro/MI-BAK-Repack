@@ -9,7 +9,7 @@ def BakMi(inputs, outputs, name):
     tarTemp = outputs + "/" + name + ".tar"
 
     print("1. Criando a estrutura de arquivos...")
-    with tarfile.open(tarTemp, "W") as tar:
+    with tarfile.open(tarTemp, "w") as tar:
         tar.add(inputs, os.path.basename(inputs))
 
     print("2. Aplicando compressão...")
