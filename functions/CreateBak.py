@@ -2,23 +2,6 @@ import os
 import tarfile
 from functions.Finale import finale
 
-def cleanMetadata(tarinfo):
-    """
-    Padroniza os metadados do cabeçalho TAR para bater com o padrão gerado no Android.
-    """
-    # Força permissões padrão de leitura/escrita do Android
-    if tarinfo.isdir():
-        tarinfo.mode = 0o755  # rwxr-xr-x
-    else:
-        tarinfo.mode = 0o660  # rw-rw----
-    
-    # Zera UID/GID para evitar que o Windows injete metadados estranhos
-    tarinfo.uid = 0
-    tarinfo.gid = 0
-    tarinfo.uname = ""
-    tarinfo.gname = ""
-    return tarinfo
-
 def BakMi(inputs, outputs, name, package):
     """
         Empacota uma pasta de dados no formato de backup compátivel com o MIUI.
@@ -29,18 +12,13 @@ def BakMi(inputs, outputs, name, package):
     print("1. Criando a estrutura de arquivos...")
     with tarfile.open(tarTemp, "w", format=tarfile.GNU_FORMAT) as tar:
         path = f"apps/{package}"
-        tar.add(inputs, arcname=path, filter=cleanMetadata)
+        tar.add(inputs, arcname=path)
 
     print("2. Aplicando compressão...")
     with open(tarTemp, "rb") as fIn:
         tarData = fIn.read()
 
-    print("3. Aplicando Patch Binário (Convertendo GNU para USTAR)...")
-    # O Python gera 'ustar  \x00' (GNU), o Android exige 'ustar\x0000' (USTAR).
-    # Como o tamanho é idêntico, a gente substitui os bytes diretamente na força bruta!
-    tarData = tarData.replace(b"ustar  \x00", b"ustar\x0000")
-
-    print("4. Injetando cabeçalho...") # Ajustar depois para personalizar
+    print("3. Injetando cabeçalho...") # Ajustar depois para personalizar
     appLabelPlaceholder = f"{package} Zeromiss"
     headerMIUI = (
         f"MIUI BACKUP\n"
