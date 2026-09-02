@@ -30,6 +30,6 @@ def BakMi(inputs, outputs, name):
         os.remove(tarTemp)
 
     byteSize = os.path.getsize(file)
-    print(f"\n[SUCESSO] Arquivo .bak gerado!")
 
-    print("\nArquivos em: " + inputs + ", usados para criar: " + name + r".bak" + ".\nPasta do .bak resultante: " + outputs + ".")
+    print(f"\nArquivos em: " + inputs + ", usados para criar: " + name + r".bak" + ".\nVeja o resultado em: " + outputs + ".")
+    print(f"Não esqueça de usar o tamanho total em bytes nos campos do descript antes de zipar.\nTamanho total: {byteSize}.")
