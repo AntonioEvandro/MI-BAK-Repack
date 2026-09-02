@@ -6,6 +6,17 @@ def end():
     print(exit())
     sys.exit(0)
 
+def proceed():
+    while True:
+        res = input("   Deseja empacotar novamente? (s/n) ")
+        if res in ("s", "sim", "yes", "ys", "y"):
+            break
+        elif res in ("n", "nao", "não", "no", "exit", "sair", "q"):
+            return end()
+        else:
+            print("   Informe uma opção válida!")
+            continue
+
 def start():
     print(menu())
     inputFiles = r"inputs"
@@ -19,5 +30,6 @@ def start():
             break
         elif fileName:
             BakMi(inputFiles, outputs, fileName)
+            proceed()
         elif not fileName:
             print("Informe um nome de arquivo a criar ou comando.")
